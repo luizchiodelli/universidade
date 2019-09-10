@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.engenharia.universidade.model.Aluno;
-import br.engenharia.universidade.service.AlunoService;
+import br.engenharia.universidade.model.Funcionario;
+import br.engenharia.universidade.service.FuncionarioService;
 
-@RestController		//Anotação com as anotações @Controller e @ResponseBody, responsáveis por expor as URI's que estarão no projeto
-@RequestMapping("/aluno")	//Anotação que define a URL do controller
-public class AlunoController {
+@RestController
+@RequestMapping("/funcionario")
+public class FuncionarioController {
 
 	@Autowired
-	private AlunoService service;
+	private FuncionarioService service;
 	
 	@PostMapping	//Anotação para requisição POST
-	public ResponseEntity<Aluno> cadastrar(@RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.cadastrar(aluno));
+	public ResponseEntity<Funcionario> cadastrar(@RequestBody Funcionario funcionario) {
+		return ResponseEntity.ok(service.cadastrar(funcionario));
 	}
 	
 	@GetMapping		//Anotação para requisição GET
-	public ResponseEntity<List<Aluno>> buscarTodos() {
+	public ResponseEntity<List<Funcionario>> buscarTodos() {
 		return ResponseEntity.ok(service.buscarTodos());
 	}
 	
@@ -49,17 +49,12 @@ public class AlunoController {
 	}
 	
 	@PutMapping(value="/{id}")		//Anotação para requisição PUT
-	public ResponseEntity alterar(@PathVariable("id") Long id, @RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.alterar(id, aluno));
+	public ResponseEntity alterar(@PathVariable("id") Long id, @RequestBody Funcionario funcionario) {
+		return ResponseEntity.ok(service.alterar(id, funcionario));
 	}
 	
 	@GetMapping(path = {"nomes/{nome}"})
-	public ResponseEntity buscarPorNome(@PathVariable("nome") String nome, @RequestBody Aluno aluno) {
+	public ResponseEntity buscarPorNome(@PathVariable("nome") String nome, @RequestBody Funcionario funcionario) {
 		return ResponseEntity.ok(service.buscarPorNome(nome));
 	}
-	
-	@GetMapping(path = {"matriculas/{matricula}"})
-	public ResponseEntity buscarPorMatricula(@PathVariable("matricula") String matricula, @RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.buscarPorMatricula(matricula));
-	}
-}	
+}

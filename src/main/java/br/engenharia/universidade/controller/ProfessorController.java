@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.engenharia.universidade.model.Aluno;
-import br.engenharia.universidade.service.AlunoService;
+import br.engenharia.universidade.model.Professor;
+import br.engenharia.universidade.service.ProfessorService;
 
-@RestController		//Anotação com as anotações @Controller e @ResponseBody, responsáveis por expor as URI's que estarão no projeto
-@RequestMapping("/aluno")	//Anotação que define a URL do controller
-public class AlunoController {
+@RestController
+@RequestMapping("/professor")
+public class ProfessorController {
 
 	@Autowired
-	private AlunoService service;
+	private ProfessorService service;
 	
 	@PostMapping	//Anotação para requisição POST
-	public ResponseEntity<Aluno> cadastrar(@RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.cadastrar(aluno));
+	public ResponseEntity<Professor> cadastrar(@RequestBody Professor professor) {
+		return ResponseEntity.ok(service.cadastrar(professor));
 	}
 	
 	@GetMapping		//Anotação para requisição GET
-	public ResponseEntity<List<Aluno>> buscarTodos() {
+	public ResponseEntity<List<Professor>> buscarTodos() {
 		return ResponseEntity.ok(service.buscarTodos());
 	}
 	
@@ -49,17 +49,7 @@ public class AlunoController {
 	}
 	
 	@PutMapping(value="/{id}")		//Anotação para requisição PUT
-	public ResponseEntity alterar(@PathVariable("id") Long id, @RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.alterar(id, aluno));
+	public ResponseEntity alterar(@PathVariable("id") Long id, @RequestBody Professor professor) {
+		return ResponseEntity.ok(service.alterar(id, professor));
 	}
-	
-	@GetMapping(path = {"nomes/{nome}"})
-	public ResponseEntity buscarPorNome(@PathVariable("nome") String nome, @RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.buscarPorNome(nome));
-	}
-	
-	@GetMapping(path = {"matriculas/{matricula}"})
-	public ResponseEntity buscarPorMatricula(@PathVariable("matricula") String matricula, @RequestBody Aluno aluno) {
-		return ResponseEntity.ok(service.buscarPorMatricula(matricula));
-	}
-}	
+}
